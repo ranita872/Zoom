@@ -1,0 +1,172 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #2e3b55, #1c2331);
+    color: white;
+}
+
+/* Home Container */
+.home-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.history-text {
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.history-text:hover {
+    color: #00adb5;
+}
+
+.logout-btn {
+    background: #e63946 !important;
+    color: white !important;
+    padding: 8px 15px !important;
+    border-radius: 8px !important;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #d62839 !important;
+}
+
+/* Main Section */
+.meetContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80vh;
+    padding: 40px;
+}
+
+/* Left Panel */
+.leftPanel {
+    max-width: 50%;
+    padding: 20px;
+}
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: white;
+}
+
+.highlight {
+    color: #00adb5;
+}
+
+.subtext {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-top: 10px;
+}
+
+.meeting-input {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.meeting-textfield {
+    width: 250px;
+    background: white;
+    border-radius: 5px;
+}
+
+.join-btn {
+    background: #00adb5 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 10px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    transition: background 0.3s ease;
+}
+
+.join-btn:hover {
+    background: #007bff !important;
+}
+
+/* Right Panel */
+.rightPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+}
+
+.meeting-image {
+    max-width: 80%;
+    height: auto;
+    filter: drop-shadow(5px 5px 20px rgba(0, 173, 181, 0.5));
+    transition: transform 0.5s ease;
+}
+
+.animated {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .meetContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .leftPanel {
+        max-width: 100%;
+    }
+
+    .rightPanel {
+        max-width: 100%;
+    }
+
+    .meeting-input {
+        flex-direction: column;
+        align-items: center;
+    }
+}

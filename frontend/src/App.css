@@ -1,0 +1,120 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+    color: white;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 20px auto;
+    width: 90%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navHeader h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF9839;
+}
+
+.navlist {
+    display: flex;
+    gap: 20px;
+}
+
+.navlist p, .navlist div {
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.navlist p:hover, .navlist div:hover {
+    background: #FF9839;
+    color: black;
+}
+
+/* Hero Section */
+.landingMainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80vh;
+    text-align: center;
+}
+
+.landingMainContainer h1 {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.landingMainContainer p {
+    font-size: 18px;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+/* Button */
+.landingMainContainer div[role="button"] {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #FF9839, #ff7b00);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.landingMainContainer div[role="button"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(255, 152, 57, 0.5);
+}
+
+.landingMainContainer a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Image Styling */
+.landingMainContainer img {
+    width: 350px;
+    animation: float 4s infinite ease-in-out;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .landingMainContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .landingMainContainer h1 {
+        font-size: 36px;
+    }
+
+    .landingMainContainer img {
+        width: 280px;
+        margin-top: 20px;
+    }
+}
+
+  
