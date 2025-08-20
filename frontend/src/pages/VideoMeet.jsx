@@ -12,10 +12,10 @@ import MicOffIcon from '@mui/icons-material/MicOff';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
-//import server from "../environment";
+import server from "../env.js";
 import {useNavigate} from "react-router-dom";
 
-const server_url = "http://localhost:8000";
+const server_url = server;
 
 var connections = {};
 

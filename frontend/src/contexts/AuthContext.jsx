@@ -2,34 +2,43 @@ import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { StatusCodes as httpStatus } from 'http-status-codes'; // Optional, or use manual codes
 import axios from "axios";
+import server from "../env.js";
 
 
 export const AuthContext = createContext({});
 
 const client = axios.create({
-  baseURL: "http://localhost:8000/api/v1/users", // Added http://
+  baseURL: `${server}/api/v1/users`, // Added http://
 });
 
 export const AuthProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
-  const router = useNavigate();
 
-  const handleRegister = async (name, username, password) => {
-    try {
-      const request = await client.post("/register", {
-        name,
-        username,
-        password,
-      });
+    const authContext = useContext(AuthContext);
 
-      if (request.status === httpStatus.CREATED) {
-        return request.data.message;
-      }
-    } catch (err) {
-      throw err;
+
+    const [userData, setUserData] = useState(authContext);
+
+
+    const router = useNavigate();
+
+    const handleRegister = async(name, username, password) => {
+        try {
+            let request = await client.post("/register", {
+                name: name,
+                username: username,
+                password: password
+            })
+
+
+            if (request.status === httpStatus.CREATED) {
+                return request.data.message;
+            }
+        } catch (err) {
+            throw err;
+        }
     }
-  }
-  const handleLogin = async(username, password) => {
+
+    const handleLogin = async(username, password) => {
         try {
             let request = await client.post("/login", {
                 username: username,
@@ -48,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-  const getHistoryOfUser = async() => {
+    const getHistoryOfUser = async() => {
         try {
             let request = await client.get("/get_all_activity", {
                 params: {
@@ -82,12 +91,11 @@ export const AuthProvider = ({ children }) => {
         handleRegister,
         handleLogin
     }
-  return (
-    <AuthContext.Provider value={data}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
 
-// ✅ Custom hook (optional)
-export const useAuth = () => useContext(AuthContext);
+    return (
+        <AuthContext.Provider value={data}>
+            {children}
+        </AuthContext.Provider>
+    )
+
+}
