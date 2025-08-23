@@ -12,7 +12,7 @@ const server = createServer(app);
 const io = connectToSocket(server); // WebSocket setup
 
 // Set port
-app.set("port", process.env.PORT || 8000);
+app.set("port", (process.env.PORT || 8000));
 
 // Middlewares
 app.use(cors({
@@ -20,6 +20,7 @@ app.use(cors({
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
+app.use(cors());
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
@@ -27,22 +28,28 @@ app.use(express.urlencoded({ limit: "40kb", extended: true }));
 app.use("/api/v1/users", userRoutes);
 
 // Default route (optional)
-app.get("/", (req, res) => {
-    res.send("Backend is running 🚀");
+// app.get("/", (req, res) => {
+//     res.send("Backend is running 🚀");
+// });
+app.get("/home", (req, res) => {
+    return res.json({ "hello": "world" });
 });
 
 // Start server + DB
 const start = async () => {
     try {
-        const connectionDB = await mongoose.connect(process.env.MONGO_URL);
+        if (!process.env.MONGO_URL) {
+            throw new Error("MONGO_URL is not defined. Check your .env file.");
+        }
 
-        console.log(`✅ MONGO Connected: ${connectionDB.connection.host}`);
+        const connectionDb = await mongoose.connect(process.env.MONGO_URL);
+        console.log(`MONGO Connected DB Host: ${connectionDb.connection.host}`);
 
         server.listen(app.get("port"), () => {
-            console.log(`🚀 Listening on port ${app.get("port")}`);
+            console.log(`LISTENING ON PORT ${app.get("port")}`);
         });
     } catch (error) {
-        console.error("❌ Database connection error:", error.message);
+        console.error("Database connection error:", error);
         process.exit(1);
     }
 };
