@@ -16,7 +16,7 @@ app.set("port", process.env.PORT || 8000);
 
 // Middlewares
 app.use(cors({
-    origin: "http://localhost:3000",  // your frontend (React dev server)
+    origin: "https://zoom-pearl-delta.vercel.app/",  // your frontend (React dev server)
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
