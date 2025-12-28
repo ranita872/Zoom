@@ -23,7 +23,7 @@ app.set("port", (process.env.PORT || 8000));
 // app.use(cors());
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://zoom-pearl-delta.vercel.app"
+  "https://facetime-vf4f.onrender.com"
 ];
 
 app.use(cors({
