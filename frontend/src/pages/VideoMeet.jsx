@@ -12,11 +12,11 @@ import MicOffIcon from '@mui/icons-material/MicOff';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
-//import server from "../environment";
+import server from "../environment";
 import {useNavigate} from "react-router-dom";
 
 //import "../styles/videoComponent.css";
-const server_url = "http://localhost:8000";
+const server_url = server;
 
 var connections = {};
 
