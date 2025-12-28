@@ -12,10 +12,11 @@ import MicOffIcon from '@mui/icons-material/MicOff';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
-import server from "../env.js";
+//import server from "../environment";
 import {useNavigate} from "react-router-dom";
 
-const server_url = server;
+//import "../styles/videoComponent.css";
+const server_url = "http://localhost:8000";
 
 var connections = {};
 
@@ -62,7 +63,6 @@ export default function VideoMeetComponent() {
     useEffect(() => {
         getPermissions();
     }, []);
-
     const getPermissions = async () =>  {
         try {
             const videoPermission = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -92,8 +92,6 @@ export default function VideoMeetComponent() {
             console.log("Error in getPermissions:", e);
         }
     };
-    
-
     let getUserMediaSuccess = (stream) => {
         console.log("HERE")
         try {
@@ -133,7 +131,7 @@ export default function VideoMeetComponent() {
 
         })
     }
-
+    
     let getUserMedia = () => {
         if ((video && videoAvailable) || (audio && audioAvailable)) {
             navigator.mediaDevices.getUserMedia({ video: video, audio: audio })
@@ -149,8 +147,7 @@ export default function VideoMeetComponent() {
             }
         }
     }
-
-    useEffect(() => {
+     useEffect(() => {
         if (video !== undefined && audio !== undefined) {
             getUserMedia();
             console.log("SET STATE HAS ", video, audio);
@@ -159,7 +156,6 @@ export default function VideoMeetComponent() {
 
 
     }, [video, audio]);
-
     let gotMessageFromServer = (fromId, message) => {
         var signal = JSON.parse(message)
 
@@ -220,7 +216,6 @@ export default function VideoMeetComponent() {
 
         })
     }
-
 
     let connectToSocketServer = () => {
         socketRef.current = io.connect(server_url, { secure: false })
@@ -317,13 +312,13 @@ export default function VideoMeetComponent() {
     }
 
 
-    let getMedia = () => {
+
+     let getMedia = () => {
         setVideo(videoAvailable);
         setAudio(audioAvailable);
         connectToSocketServer();
 
     }
-
     let silence = () => {
         let ctx = new AudioContext()
         let oscillator = ctx.createOscillator()
@@ -338,7 +333,6 @@ export default function VideoMeetComponent() {
         let stream = canvas.captureStream()
         return Object.assign(stream.getVideoTracks()[0], { enabled: false })
     }
-
     let handleVideo = () => {
         setVideo(!video);
         // getUserMedia();
@@ -370,6 +364,7 @@ export default function VideoMeetComponent() {
     }
 
     let navigate = useNavigate();
+    
 const handleEndCall = () => {
     try {
         let tracks = localVideoref.current?.srcObject?.getTracks();
@@ -573,11 +568,10 @@ const handleEndCall = () => {
 // import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 // import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 // import ChatIcon from '@mui/icons-material/Chat';
-// //import server from "../environment";
+// import server from "../env.js";
 // import {useNavigate} from "react-router-dom";
 
-// //import "../styles/videoComponent.css";
-// const server_url = "http://localhost:8000";
+// const server_url = server;
 
 // var connections = {};
 
@@ -624,6 +618,7 @@ const handleEndCall = () => {
 //     useEffect(() => {
 //         getPermissions();
 //     }, []);
+
 //     const getPermissions = async () =>  {
 //         try {
 //             const videoPermission = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -653,6 +648,8 @@ const handleEndCall = () => {
 //             console.log("Error in getPermissions:", e);
 //         }
 //     };
+    
+
 //     let getUserMediaSuccess = (stream) => {
 //         console.log("HERE")
 //         try {
@@ -692,7 +689,7 @@ const handleEndCall = () => {
 
 //         })
 //     }
-    
+
 //     let getUserMedia = () => {
 //         if ((video && videoAvailable) || (audio && audioAvailable)) {
 //             navigator.mediaDevices.getUserMedia({ video: video, audio: audio })
@@ -708,7 +705,8 @@ const handleEndCall = () => {
 //             }
 //         }
 //     }
-//      useEffect(() => {
+
+//     useEffect(() => {
 //         if (video !== undefined && audio !== undefined) {
 //             getUserMedia();
 //             console.log("SET STATE HAS ", video, audio);
@@ -717,6 +715,7 @@ const handleEndCall = () => {
 
 
 //     }, [video, audio]);
+
 //     let gotMessageFromServer = (fromId, message) => {
 //         var signal = JSON.parse(message)
 
@@ -777,6 +776,7 @@ const handleEndCall = () => {
 
 //         })
 //     }
+
 
 //     let connectToSocketServer = () => {
 //         socketRef.current = io.connect(server_url, { secure: false })
@@ -873,13 +873,13 @@ const handleEndCall = () => {
 //     }
 
 
-
-//      let getMedia = () => {
+//     let getMedia = () => {
 //         setVideo(videoAvailable);
 //         setAudio(audioAvailable);
 //         connectToSocketServer();
 
 //     }
+
 //     let silence = () => {
 //         let ctx = new AudioContext()
 //         let oscillator = ctx.createOscillator()
@@ -894,6 +894,7 @@ const handleEndCall = () => {
 //         let stream = canvas.captureStream()
 //         return Object.assign(stream.getVideoTracks()[0], { enabled: false })
 //     }
+
 //     let handleVideo = () => {
 //         setVideo(!video);
 //         // getUserMedia();
@@ -925,7 +926,6 @@ const handleEndCall = () => {
 //     }
 
 //     let navigate = useNavigate();
-    
 // const handleEndCall = () => {
 //     try {
 //         let tracks = localVideoref.current?.srcObject?.getTracks();
