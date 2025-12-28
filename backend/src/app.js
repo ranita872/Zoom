@@ -14,13 +14,31 @@ const io = connectToSocket(server); // WebSocket setup
 // Set port
 app.set("port", (process.env.PORT || 8000));
 
-// Middlewares
+// ---------------------------------------------------Middlewares
+// app.use(cors({
+//     origin: "http://localhost:3000",  // your frontend (React dev server)
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true
+// }));
+// app.use(cors());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://zoom-pearl-delta.vercel.app"
+];
+
 app.use(cors({
-    origin: "https://zoom-pearl-delta.vercel.app/",  // your frontend (React dev server)
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Postman, curl
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 }));
-app.use(cors());
+
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 

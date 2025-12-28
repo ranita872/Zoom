@@ -14,6 +14,17 @@ export const connectToSocket = (server) => {
             credentials: true
         }
     });
+//     const io = new Server(server, {
+//     cors: {
+//     origin: [
+//       "http://localhost:3000",
+//       "https://zoom-pearl-delta.vercel.app"
+//     ],
+//     methods: ["GET", "POST"],
+//     credentials: true
+//   }
+// });
+
 
 
     io.on("connection", (socket) => {
